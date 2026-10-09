@@ -43,7 +43,7 @@ add_definitions(-D_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING)
 
 option(BUILD_PLUGIN_SESSIONS_TESTS "Build the standalone Plugin Sessions view-model tests" OFF)
 option(BUILD_KNOBKRAFT_RECALL_INTEGRATION_TESTS "Build the Recall end-to-end integration tests" OFF)
-if(BUILD_KNOBKRAFT_PLUGIN_TESTS OR MIDIKRAFT_BUILD_SESSION_TESTS OR BUILD_KNOBKRAFT_ENGINE_BRIDGE_TESTS OR BUILD_PLUGIN_SESSIONS_TESTS OR BUILD_KNOBKRAFT_RECALL_INTEGRATION_TESTS)
+if(BUILD_KNOBKRAFT_PLUGIN_TESTS OR BUILD_KK_TESTS OR MIDIKRAFT_BUILD_SESSION_TESTS OR BUILD_KNOBKRAFT_ENGINE_BRIDGE_TESTS OR BUILD_PLUGIN_SESSIONS_TESTS OR BUILD_KNOBKRAFT_RECALL_INTEGRATION_TESTS)
 	enable_testing()
 endif()
 
@@ -381,6 +381,13 @@ add_subdirectory(MidiKraft)
 option(BUILD_KNOBKRAFT_PLUGIN "Build the KnobKraft Recall VST3 plugin" ON)
 if(BUILD_KNOBKRAFT_PLUGIN)
 	add_subdirectory(KnobKraft-Plugin)
+endif()
+
+# kk is a command-line client for a running KnobKraft, using the same session
+# bridge as the plugin. It needs neither JUCE nor the Orm app.
+option(BUILD_KK_CLI "Build the kk command-line client" ON)
+if(BUILD_KK_CLI)
+	add_subdirectory(KnobKraft-CLI)
 endif()
 
 # Import the synths currently supported
